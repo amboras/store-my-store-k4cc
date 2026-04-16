@@ -4,35 +4,32 @@
 
 @layer base {
   :root {
-    --background: 40 20% 98%;
-    --foreground: 0 0% 10%;
-    --muted: 40 10% 94%;
-    --muted-foreground: 0 0% 45%;
-    --accent: 35 40% 50%;
+    /* Agency dark-ink palette */
+    --background: 0 0% 98%;
+    --foreground: 220 20% 8%;
+    --muted: 220 10% 94%;
+    --muted-foreground: 220 10% 48%;
+    --accent: 246 80% 60%;
     --accent-foreground: 0 0% 100%;
-    --border: 40 10% 88%;
-    --ring: 35 40% 50%;
-    --primary: 0 0% 10%;
+    --border: 220 10% 88%;
+    --ring: 246 80% 60%;
+    --primary: 220 20% 8%;
     --primary-foreground: 0 0% 98%;
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
-
-    /* Brand colors (dynamically injected from Store.metadata.brand) */
-    /* Access in CSS: var(--brand-primary), var(--brand-secondary) */
-    /* Managed by BrandStyleInjector component */
   }
 
   .dark {
-    --background: 0 0% 6%;
-    --foreground: 40 20% 94%;
-    --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 55%;
-    --accent: 35 45% 55%;
+    --background: 220 20% 6%;
+    --foreground: 220 10% 94%;
+    --muted: 220 14% 12%;
+    --muted-foreground: 220 10% 55%;
+    --accent: 246 80% 65%;
     --accent-foreground: 0 0% 100%;
-    --border: 0 0% 16%;
-    --ring: 35 45% 55%;
-    --primary: 40 20% 94%;
-    --primary-foreground: 0 0% 6%;
+    --border: 220 14% 16%;
+    --ring: 246 80% 65%;
+    --primary: 220 10% 94%;
+    --primary-foreground: 220 20% 6%;
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
   }
@@ -72,13 +69,12 @@
     @apply w-full;
   }
 
-  /* Brand color utilities - uses colors from Store.metadata.brand */
   .btn-brand-primary {
     background-color: var(--brand-primary, hsl(var(--primary)));
     color: white;
   }
   .btn-brand-primary:hover {
-    opacity: 0.9;
+    opacity: 0.88;
   }
 
   .text-brand-primary {
@@ -100,35 +96,55 @@
   .bg-brand-secondary {
     background-color: var(--brand-secondary, hsl(var(--accent)));
   }
+
+  /* Agency accent gradient */
+  .gradient-accent {
+    background: linear-gradient(135deg, hsl(246 80% 60%) 0%, hsl(280 70% 58%) 100%);
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, hsl(246 80% 60%) 0%, hsl(280 70% 58%) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 }
 
-/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
 
-/* Selection color */
 ::selection {
-  @apply bg-accent/20 text-foreground;
+  background: hsl(246 80% 60% / 0.15);
+  color: hsl(220 20% 8%);
 }
 
-/* Focus styles */
 :focus-visible {
   @apply outline-2 outline-offset-2 outline-ring;
 }
 
-/* Cookie consent animation */
 @keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(1rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(1rem); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .animate-fade-in {
-  animation: fade-in 0.3s ease-out;
+  animation: fade-in 0.4s ease-out;
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+.animate-pulse-dot {
+  animation: pulse-dot 1.4s ease-in-out infinite;
 }
